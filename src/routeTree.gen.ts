@@ -9,8 +9,44 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SipPlannerRouteImport } from './routes/sip-planner'
+import { Route as PortfolioRouteImport } from './routes/portfolio'
+import { Route as MarketsRouteImport } from './routes/markets'
+import { Route as DashboardRouteImport } from './routes/dashboard'
+import { Route as AiInsightsRouteImport } from './routes/ai-insights'
+import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 
+const SipPlannerRoute = SipPlannerRouteImport.update({
+  id: '/sip-planner',
+  path: '/sip-planner',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PortfolioRoute = PortfolioRouteImport.update({
+  id: '/portfolio',
+  path: '/portfolio',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MarketsRoute = MarketsRouteImport.update({
+  id: '/markets',
+  path: '/markets',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardRoute = DashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AiInsightsRoute = AiInsightsRouteImport.update({
+  id: '/ai-insights',
+  path: '/ai-insights',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -19,28 +55,116 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/ai-insights': typeof AiInsightsRoute
+  '/dashboard': typeof DashboardRoute
+  '/markets': typeof MarketsRoute
+  '/portfolio': typeof PortfolioRoute
+  '/sip-planner': typeof SipPlannerRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/ai-insights': typeof AiInsightsRoute
+  '/dashboard': typeof DashboardRoute
+  '/markets': typeof MarketsRoute
+  '/portfolio': typeof PortfolioRoute
+  '/sip-planner': typeof SipPlannerRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/ai-insights': typeof AiInsightsRoute
+  '/dashboard': typeof DashboardRoute
+  '/markets': typeof MarketsRoute
+  '/portfolio': typeof PortfolioRoute
+  '/sip-planner': typeof SipPlannerRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/ai-insights'
+    | '/dashboard'
+    | '/markets'
+    | '/portfolio'
+    | '/sip-planner'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/about'
+    | '/ai-insights'
+    | '/dashboard'
+    | '/markets'
+    | '/portfolio'
+    | '/sip-planner'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/ai-insights'
+    | '/dashboard'
+    | '/markets'
+    | '/portfolio'
+    | '/sip-planner'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  AiInsightsRoute: typeof AiInsightsRoute
+  DashboardRoute: typeof DashboardRoute
+  MarketsRoute: typeof MarketsRoute
+  PortfolioRoute: typeof PortfolioRoute
+  SipPlannerRoute: typeof SipPlannerRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/sip-planner': {
+      id: '/sip-planner'
+      path: '/sip-planner'
+      fullPath: '/sip-planner'
+      preLoaderRoute: typeof SipPlannerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/portfolio': {
+      id: '/portfolio'
+      path: '/portfolio'
+      fullPath: '/portfolio'
+      preLoaderRoute: typeof PortfolioRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/markets': {
+      id: '/markets'
+      path: '/markets'
+      fullPath: '/markets'
+      preLoaderRoute: typeof MarketsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard': {
+      id: '/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ai-insights': {
+      id: '/ai-insights'
+      path: '/ai-insights'
+      fullPath: '/ai-insights'
+      preLoaderRoute: typeof AiInsightsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -53,17 +177,13 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
+  AiInsightsRoute: AiInsightsRoute,
+  DashboardRoute: DashboardRoute,
+  MarketsRoute: MarketsRoute,
+  PortfolioRoute: PortfolioRoute,
+  SipPlannerRoute: SipPlannerRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
