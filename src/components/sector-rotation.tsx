@@ -19,7 +19,7 @@ export function SectorRotation() {
             <Tooltip
               cursor={{ fill: "var(--color-surface-3)" }}
               contentStyle={{ background: "var(--color-surface-3)", border: "1px solid var(--color-border)", borderRadius: 8, fontSize: 12 }}
-              formatter={(v: number) => formatPct(v)}
+              formatter={(v: any) => formatPct(Number(v))}
             />
             <Bar dataKey="change" radius={[0, 4, 4, 0]}>
               {data.map((d, i) => (

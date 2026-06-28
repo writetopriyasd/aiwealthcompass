@@ -27,7 +27,7 @@ export function YieldCurveChart() {
             <CartesianGrid stroke="var(--color-border)" strokeDasharray="2 4" vertical={false} />
             <XAxis dataKey="tenor" stroke="var(--color-muted-foreground)" fontSize={11} tickFormatter={(v) => `${v}y`} />
             <YAxis stroke="var(--color-muted-foreground)" fontSize={11} domain={["dataMin - 0.2", "dataMax + 0.2"]} tickFormatter={(v) => `${v}%`} />
-            <Tooltip contentStyle={{ background: "var(--color-surface-3)", border: "1px solid var(--color-border)", borderRadius: 8, fontSize: 12 }} formatter={(v: number) => `${v.toFixed(2)}%`} labelFormatter={(l) => `${l} year`} />
+            <Tooltip contentStyle={{ background: "var(--color-surface-3)", border: "1px solid var(--color-border)", borderRadius: 8, fontSize: 12 }} formatter={(v: any) => `${Number(v).toFixed(2)}%`} labelFormatter={(l) => `${l} year`} />
             <Line type="monotone" dataKey="yield" stroke="var(--color-primary)" strokeWidth={2.5} dot={{ r: 4, fill: "var(--color-primary)" }} />
           </LineChart>
         </ResponsiveContainer>

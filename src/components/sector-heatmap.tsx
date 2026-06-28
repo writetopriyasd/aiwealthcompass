@@ -14,7 +14,7 @@ export function SectorHeatmap() {
   const ticks = useMarketStore((s) => s.ticks);
   const [region, setRegion] = useState<Region | "ALL">("ALL");
 
-  const sectorRows = SECTORS.map((sector) => {
+  const sectorRows = SECTORS.map((sector): { name: string; size: number; change: number } | null => {
     const filtered = ALL_INSTRUMENTS.filter((i) =>
       i.sector === sector && (region === "ALL" || i.region === region) && i.assetClass !== "fx",
     );
@@ -29,7 +29,7 @@ export function SectorHeatmap() {
     });
     const change = mcap > 0 ? weighted / mcap : 0;
     return { name: sector, size: Math.max(mcap, 30), change };
-  }).filter((x): x is { name: string; size: number; change: number } => !!x);
+  }).filter((x): x is { name: string; size: number; change: number } => x !== null);
 
   return (
     <div className="card-surface p-4">
@@ -63,10 +63,10 @@ export function SectorHeatmap() {
             <Tooltip
               cursor={{ fill: "transparent" }}
               contentStyle={{ background: "var(--color-surface-3)", border: "1px solid var(--color-border)", borderRadius: 8, fontSize: 12 }}
-              formatter={(_v: number, _k, item) => {
+              formatter={((_v: unknown, _k: unknown, item: any) => {
                 const p = item.payload as { name: string; change: number };
-                return [`${formatPct(p.change)}`, p.name];
-              }}
+                return [`${formatPct(p.change)}`, p.name] as [string, string];
+              }) as any}
             />
           </Treemap>
         </ResponsiveContainer>

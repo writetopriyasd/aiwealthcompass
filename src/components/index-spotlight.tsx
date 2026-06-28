@@ -51,7 +51,7 @@ export function IndexSpotlight() {
             <YAxis hide domain={["dataMin", "dataMax"]} />
             <Tooltip
               contentStyle={{ background: "var(--color-surface-3)", border: "1px solid var(--color-border)", borderRadius: 8, fontSize: 12 }}
-              formatter={(v: number) => formatNumber(v, 2)}
+              formatter={(v: any) => formatNumber(Number(v), 2)}
               labelFormatter={() => ""}
             />
             <Area type="monotone" dataKey="p" stroke={tone === "loss" ? "var(--color-loss)" : "var(--color-primary)"} strokeWidth={2} fill="url(#g-spot)" />
