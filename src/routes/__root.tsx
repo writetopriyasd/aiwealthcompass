@@ -4,7 +4,7 @@ import "@fontsource/inter/600.css";
 import "@fontsource/outfit/500.css";
 import "@fontsource/outfit/600.css";
 import "@fontsource/outfit/700.css";
-import "@fontsource-variable/jetbrains-mono";
+import "@fontsource-variable/jetbrains-mono/index.css";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {
