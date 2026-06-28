@@ -65,15 +65,15 @@ Allowed instrument symbols (MUST stay within this list): ${ALLOWED_SYMBOLS.join(
 Produce 2-5 concrete, tier-appropriate rebalancing actions for SIPs, MFs, and debt instruments. Respect lock-ins (ELSS like MIRAEELS has a 3-year lock-in — never recommend trimming). Flag concentration risks above 40%. Do not invent symbols.`;
 
     try {
-      const { experimental_output } = await generateText({
+      const result = await generateText({
         model: gateway("google/gemini-3-flash-preview"),
         prompt,
-        experimental_output: Output.object({ schema: RebalanceSchema }),
+        output: Output.object({ schema: RebalanceSchema }),
       });
-      // Filter out-of-universe symbols
+      const parsed = result.output as RebalanceResult;
       const cleaned: RebalanceResult = {
-        ...experimental_output,
-        actions: experimental_output.actions.filter((a) => ALLOWED_SYMBOLS.includes(a.symbol)),
+        ...parsed,
+        actions: parsed.actions.filter((a) => ALLOWED_SYMBOLS.includes(a.symbol)),
       };
       return { ok: true as const, data: cleaned };
     } catch (err) {
