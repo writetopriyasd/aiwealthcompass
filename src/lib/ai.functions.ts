@@ -29,7 +29,7 @@ const RebalanceSchema = z.object({
     action: z.enum(["INCREASE_SIP", "DECREASE_SIP", "PAUSE_SIP", "START_SIP", "TRIM", "ACCUMULATE", "HOLD"]),
     rationale: z.string(),
     confidence: z.enum(["low", "medium", "high"]),
-  })).min(2).max(5),
+  })).min(2).max(3),
   riskFlags: z.array(z.string()).max(4),
 });
 
@@ -62,7 +62,7 @@ Today's portfolio snapshot:
 
 Allowed instrument symbols (MUST stay within this list): ${ALLOWED_SYMBOLS.join(", ")}
 
-Produce 2-5 concrete, tier-appropriate rebalancing actions for SIPs, MFs, and debt instruments. Respect lock-ins (ELSS like MIRAEELS has a 3-year lock-in — never recommend trimming). Flag concentration risks above 40%. Do not invent symbols.`;
+Produce exactly 3 concrete, tier-appropriate rebalancing actions for SIPs, MFs, and debt instruments. Respect lock-ins (ELSS like MIRAEELS has a 3-year lock-in — never recommend trimming). Flag concentration risks above 40%. Do not invent symbols.`;
 
     try {
       const result = await generateText({
