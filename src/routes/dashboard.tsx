@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { TickerRail } from "@/components/shell";
 import { TierSelector } from "@/components/tier-selector";
 import { KpiCard } from "@/components/kpi-card";
-import { SectorHeatmap } from "@/components/sector-heatmap";
+
 import { SectorRotation } from "@/components/sector-rotation";
 import { IndexSpotlight } from "@/components/index-spotlight";
 import { GoalTracker } from "@/components/goal-tracker";
@@ -59,7 +59,7 @@ function Dashboard() {
 
         {/* Bento grid */}
         <div className="mt-6 grid gap-4 lg:grid-cols-3">
-          <div className="lg:col-span-2"><SectorHeatmap /></div>
+          
           <div><AiInsightsPanel /></div>
           <div><IndexSpotlight /></div>
           <div><SectorRotation /></div>
