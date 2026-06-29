@@ -59,8 +59,6 @@ function Dashboard() {
 
         {/* Bento grid */}
         <div className="mt-6 grid gap-4 lg:grid-cols-3">
-          
-          <div><AiInsightsPanel /></div>
           <div><IndexSpotlight /></div>
           <div><SectorRotation /></div>
           <div><GoalTracker /></div>
