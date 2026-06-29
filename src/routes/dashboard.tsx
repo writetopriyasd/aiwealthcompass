@@ -7,7 +7,7 @@ import { SectorRotation } from "@/components/sector-rotation";
 import { IndexSpotlight } from "@/components/index-spotlight";
 import { GoalTracker } from "@/components/goal-tracker";
 import { AlertsFeed } from "@/components/alerts-feed";
-import { AiInsightsPanel } from "@/components/ai-insights-panel";
+
 import { SipCalendar } from "@/components/sip-calendar";
 import { YieldCurveChart } from "@/components/yield-curve";
 import { usePortfolioMetrics } from "@/hooks/use-portfolio-metrics";
