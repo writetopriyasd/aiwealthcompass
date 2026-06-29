@@ -81,8 +81,8 @@ function HeatCell(props: any) {
   const intensity = Math.min(Math.abs(change ?? 0) / 2.5, 1);
   const positive = (change ?? 0) >= 0;
   const fill = positive
-    ? `oklch(${0.30 + intensity * 0.32} ${0.10 + intensity * 0.10} 160)`
-    : `oklch(${0.30 + intensity * 0.30} ${0.10 + intensity * 0.12} 25)`;
+    ? `oklch(${0.50 + intensity * 0.18} ${0.06 + intensity * 0.05} 155)`
+    : `oklch(${0.52 + intensity * 0.16} ${0.06 + intensity * 0.05} 22)`;
   return (
     <g>
       <rect x={x} y={y} width={width} height={height} fill={fill} stroke="var(--color-background)" />
