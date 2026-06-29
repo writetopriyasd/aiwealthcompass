@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useServerFn } from "@tanstack/react-start";
 import { generateInsight, type RebalanceResult } from "@/lib/ai.functions";
 import { usePortfolioMetrics } from "@/hooks/use-portfolio-metrics";
@@ -15,6 +15,43 @@ const ACTION_TONE: Record<string, string> = {
   HOLD: "text-muted-foreground bg-surface-3",
 };
 
+const CACHE_KEY = "finpulse_ai_insights_v1";
+const CACHE_TTL_MS = 5 * 60 * 1000; // 5 minutes
+const COOLDOWN_MS = 30_000; // 30 seconds between re-analyze clicks
+
+type CacheEntry = {
+  tier: string;
+  portfolioValueINR: number;
+  dayPnlPct: number;
+  data: RebalanceResult;
+  ts: number;
+};
+
+function getCached(tier: string, portfolioValueINR: number, dayPnlPct: number): RebalanceResult | null {
+  try {
+    const raw = sessionStorage.getItem(CACHE_KEY);
+    if (!raw) return null;
+    const entry: CacheEntry = JSON.parse(raw);
+    if (Date.now() - entry.ts > CACHE_TTL_MS) return null;
+    if (entry.tier !== tier) return null;
+    // Allow ±5% portfolio value drift and ±0.5% P&L drift before invalidating
+    if (Math.abs(entry.portfolioValueINR - portfolioValueINR) / portfolioValueINR > 0.05) return null;
+    if (Math.abs(entry.dayPnlPct - dayPnlPct) > 0.5) return null;
+    return entry.data;
+  } catch {
+    return null;
+  }
+}
+
+function setCached(tier: string, portfolioValueINR: number, dayPnlPct: number, data: RebalanceResult) {
+  try {
+    const entry: CacheEntry = { tier, portfolioValueINR, dayPnlPct, data, ts: Date.now() };
+    sessionStorage.setItem(CACHE_KEY, JSON.stringify(entry));
+  } catch {
+    // ignore storage errors
+  }
+}
+
 export function AiInsightsPanel() {
   const metrics = usePortfolioMetrics();
   const run = useServerFn(generateInsight);
@@ -25,7 +62,48 @@ export function AiInsightsPanel() {
     | { kind: "err"; msg: string }
   >({ kind: "idle" });
 
+  const lastCallRef = useRef<number>(0);
+  const [cooldownLeft, setCooldownLeft] = useState(0);
+
+  // Restore from cache on mount
+  useEffect(() => {
+    const cached = getCached(metrics.tier, metrics.totalValueINR, metrics.dayPnlPct);
+    if (cached) {
+      setState({ kind: "ok", data: cached });
+    }
+  }, []);
+
+  // Cooldown timer tick
+  useEffect(() => {
+    if (cooldownLeft <= 0) return;
+    const id = setInterval(() => {
+      setCooldownLeft((prev) => {
+        const next = Math.max(0, Math.ceil((lastCallRef.current + COOLDOWN_MS - Date.now()) / 1000));
+        return next;
+      });
+    }, 1000);
+    return () => clearInterval(id);
+  }, [cooldownLeft]);
+
+  const canAnalyze = useMemo(() => {
+    return Date.now() - lastCallRef.current >= COOLDOWN_MS;
+  }, [state.kind]);
+
   async function analyze() {
+    const now = Date.now();
+    if (now - lastCallRef.current < COOLDOWN_MS) {
+      setCooldownLeft(Math.ceil((lastCallRef.current + COOLDOWN_MS - now) / 1000));
+      return;
+    }
+    lastCallRef.current = now;
+
+    // Try cache first before hitting the server
+    const cached = getCached(metrics.tier, metrics.totalValueINR, metrics.dayPnlPct);
+    if (cached) {
+      setState({ kind: "ok", data: cached });
+      return;
+    }
+
     setState({ kind: "loading" });
     try {
       const res = await run({
@@ -40,12 +118,25 @@ export function AiInsightsPanel() {
           sectorMoves: metrics.bySector.slice(0, 6).map((s) => ({ sector: s.sector, changePct: s.dayChangePct })),
         },
       });
-      if (res.ok) setState({ kind: "ok", data: res.data });
-      else setState({ kind: "err", msg: res.error });
+      if (res.ok) {
+        setCached(metrics.tier, metrics.totalValueINR, metrics.dayPnlPct, res.data);
+        setState({ kind: "ok", data: res.data });
+      } else {
+        setState({ kind: "err", msg: res.error });
+      }
     } catch (e) {
       setState({ kind: "err", msg: e instanceof Error ? e.message : "Unknown error" });
     }
   }
+
+  const btnText = useMemo(() => {
+    if (state.kind === "loading") return "Analyzing…";
+    if (cooldownLeft > 0) return `Wait ${cooldownLeft}s`;
+    if (state.kind === "ok") return "Re-analyze";
+    return "Analyze portfolio";
+  }, [state.kind, cooldownLeft]);
+
+  const btnDisabled = state.kind === "loading" || cooldownLeft > 0;
 
   return (
     <div className="card-surface flex flex-col p-4">
@@ -58,11 +149,11 @@ export function AiInsightsPanel() {
         </div>
         <button
           onClick={analyze}
-          disabled={state.kind === "loading"}
+          disabled={btnDisabled}
           className="inline-flex items-center gap-1.5 rounded-md bg-primary px-3 py-1.5 text-xs font-medium text-primary-foreground transition hover:opacity-90 disabled:opacity-60"
         >
           {state.kind === "loading" ? <Loader2 className="size-3 animate-spin" /> : <Sparkles className="size-3" />}
-          {state.kind === "ok" ? "Re-analyze" : "Analyze portfolio"}
+          {btnText}
         </button>
       </div>
 
