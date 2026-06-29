@@ -59,7 +59,7 @@ function Dashboard() {
 
         {/* Bento grid */}
         <div className="mt-6 grid gap-4 lg:grid-cols-3">
-          <div className="lg:col-span-2"><SectorHeatmap /></div>
+          
           <div><AiInsightsPanel /></div>
           <div><IndexSpotlight /></div>
           <div><SectorRotation /></div>
