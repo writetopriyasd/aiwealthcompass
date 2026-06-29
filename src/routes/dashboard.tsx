@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { TickerRail } from "@/components/shell";
 import { TierSelector } from "@/components/tier-selector";
 import { KpiCard } from "@/components/kpi-card";
-import { SectorHeatmap } from "@/components/sector-heatmap";
+
 import { SectorRotation } from "@/components/sector-rotation";
 import { IndexSpotlight } from "@/components/index-spotlight";
 import { GoalTracker } from "@/components/goal-tracker";
