@@ -1,108 +1,128 @@
 [FinPulse AI – Real-time markets, smarter SIPs](https://bit.ly/4ybnYNe) <img width="40" height="40" alt="image" src="https://github.com/user-attachments/assets/f4e2774a-c1ae-4327-ab29-030b4c1fd0a5" />
 
-FinPulse AI is an educational, AI-assisted portfolio dashboard that simulates how Indian investors could monitor SIPs, mutual funds, and debt products in one real-time, narrative-led interface. It focuses on making complex market data and goal tracking feel intuitive, especially for users in different net-worth tiers.
+FinPulse AI is an educational, AI-assisted portfolio dashboard that simulates how Indian investors could monitor SIPs, mutual funds, and debt products in one real-time, narrative-led interface. It focuses on making complex market data and goal tracking feel intuitive, especially for users in different net-worth tiers. [aiwealthcompass.lovable](https://aiwealthcompass.lovable.app/)
 
-Note: All market and portfolio data in this prototype is simulated and for demonstration only.
+> Note: All market and portfolio data in this prototype is simulated and for demonstration only. [aiwealthcompass.lovable](https://aiwealthcompass.lovable.app/)
 
-Live demo
-Web app: https://aiwealthcompass.lovable.app/
+***
 
-Status: Public demo, no signup required, sample portfolios only.
+## Live demo
 
-Problem statement
-Most retail investors in India juggle multiple apps to track SIPs, mutual funds, and loans, often lacking a consolidated view of risk, goals, and cash flows.
+- Web app: https://aiwealthcompass.lovable.app/ [aiwealthcompass.lovable](https://aiwealthcompass.lovable.app/)
+- Status: Public demo, no signup required, sample portfolios only. [aiwealthcompass.lovable](https://aiwealthcompass.lovable.app/)
+
+***
+
+## Problem statement
+
+Most retail investors in India juggle multiple apps to track SIPs, mutual funds, and loans, often lacking a consolidated view of risk, goals, and cash flows.  
 FinPulse AI explores how a single AI-narrated dashboard can:
 
-Provide one “screen of truth” across SIPs, MFs, and debt.
+- Provide one “screen of truth” across SIPs, MFs, and debt. [aiwealthcompass.lovable](https://aiwealthcompass.lovable.app/)
+- Translate raw market data into tier-aware, plain-language advice.  
+- Keep long-term goals (retirement, education, legacy) anchored to actual portfolio behavior. [aiwealthcompass.lovable](https://aiwealthcompass.lovable.app/)
 
-Translate raw market data into tier-aware, plain-language advice.
+***
 
-Keep long-term goals (retirement, education, legacy) anchored to actual portfolio behavior.
+## Key features
 
-Key features
-AI-powered financial command center
-Single dashboard for market tickers, portfolio metrics, and AI commentary tailored to Low, Medium, and High net-worth investors.
+- **AI-powered financial command center**  
+  Single dashboard for market tickers, portfolio metrics, and AI commentary tailored to Low, Medium, and High net-worth investors. [aiwealthcompass.lovable](https://aiwealthcompass.lovable.app/)
 
-Real-time (simulated) market rail
-Live-style ticker showing Indian indices (NIFTY50, SENSEX, BANKNIFTY, NIFTYIT) along with global indices, currencies, commodities, and crypto.
+- **Real-time (simulated) market rail**  
+  Live-style ticker showing Indian indices (NIFTY50, SENSEX, BANKNIFTY, NIFTYIT) along with global indices, currencies, commodities, and crypto. [aiwealthcompass.lovable](https://aiwealthcompass.lovable.app/)
 
-Portfolio overview
-Snapshot of total portfolio value, day P&L, and 12‑month trailing XIRR to approximate performance over time.
+- **Portfolio overview**  
+  Snapshot of total portfolio value, day P&L, and 12‑month trailing XIRR to approximate performance over time. [aiwealthcompass.lovable](https://aiwealthcompass.lovable.app/)
 
-Goal-based tracking
-OKR-style progress for goals like “Retire by 55,” with SIP step-up logic to stay on track.
+- **Goal-based tracking**  
+  OKR-style progress for goals like “Retire by 55,” with SIP step-up logic to stay on track. [aiwealthcompass.lovable](https://aiwealthcompass.lovable.app/)
 
-Tier-aware AI insights
-AI suggestions that differ by investor tier (Low/Medium/High net-worth), e.g. concentration alerts and rebalancing nudges.
+- **Tier-aware AI insights**  
+  AI suggestions that differ by investor tier (Low/Medium/High net-worth), e.g. concentration alerts and rebalancing nudges. [aiwealthcompass.lovable](https://aiwealthcompass.lovable.app/)
 
-Risk-first UX
-Visual cues for concentration, lock-in awareness, and color-blind safe gain/loss indicators.
+- **Risk-first UX**  
+  Visual cues for concentration, lock-in awareness, and color-blind safe gain/loss indicators. [aiwealthcompass.lovable](https://aiwealthcompass.lovable.app/)
 
-AI insight example
+***
+
+## AI insight example
+
 A sample AI suggestion from the dashboard:
 
-“Trim small-cap SIP by 20% — concentration in Sun Pharma + SBI Small Cap has crossed 38%. Redirect inflow to Corporate Bond Fund for the next 2 months.”
+> “Trim small-cap SIP by 20% — concentration in Sun Pharma + SBI Small Cap has crossed 38%. Redirect inflow to Corporate Bond Fund for the next 2 months.” [aiwealthcompass.lovable](https://aiwealthcompass.lovable.app/)
 
-This showcases how the system surfaces concentrated risk and suggests short-term allocation tweaks, while remaining clearly labeled as non-advisory.
+This showcases how the system surfaces concentrated risk and suggests short-term allocation tweaks, while remaining clearly labeled as non-advisory. [aiwealthcompass.lovable](https://aiwealthcompass.lovable.app/)
 
-Architecture overview
-This section is intentionally technology-agnostic so you can adapt it to the actual stack used in your implementation.
+***
 
-Frontend
+## Architecture overview
 
-Single-page application dashboard (responsive, desktop-first)
+> This section is intentionally technology-agnostic so you can adapt it to the actual stack used in your implementation.
 
-Navigation across Home, Dashboard, Markets, Portfolio, SIP Planner, AI Insights, and About sections.
+- **Frontend**  
+  - Single-page application dashboard (responsive, desktop-first)  
+  - Navigation across Home, Dashboard, Markets, Portfolio, SIP Planner, AI Insights, and About sections. [aiwealthcompass.lovable](https://aiwealthcompass.lovable.app/)
 
-Data layer
+- **Data layer**  
+  - Simulated quotes for indices, FX, commodities, and crypto (no real-time feeds). [aiwealthcompass.lovable](https://aiwealthcompass.lovable.app/)
+  - Mock portfolio holdings and SIP schedules to demonstrate analytics. [aiwealthcompass.lovable](https://aiwealthcompass.lovable.app/)
 
-Simulated quotes for indices, FX, commodities, and crypto (no real-time feeds).
+- **AI / logic**  
+  - Rule-based + prompt-driven templates for tier-aware recommendations (Low/Medium/High net-worth). [aiwealthcompass.lovable](https://aiwealthcompass.lovable.app/)
+  - Goal progress and XIRR calculations on simulated data. [aiwealthcompass.lovable](https://aiwealthcompass.lovable.app/)
 
-Mock portfolio holdings and SIP schedules to demonstrate analytics.
+***
 
-AI / logic
+## User journeys
 
-Rule-based + prompt-driven templates for tier-aware recommendations (Low/Medium/High net-worth).
+1. **Market pulse first**  
+   - Land on Home → scan ticker rail for NIFTY50, SENSEX, global indices, BTC, ETH, USDINR, etc. [aiwealthcompass.lovable](https://aiwealthcompass.lovable.app/)
+   - Click “Open Dashboard” to view portfolio and AI commentary in context. [aiwealthcompass.lovable](https://aiwealthcompass.lovable.app/)
 
-Goal progress and XIRR calculations on simulated data.
+2. **Goal-first investor**  
+   - Navigate to Dashboard → focus on “Retire by 55” or similar goals and see % completion, SIP requirements, and step-up needs. [aiwealthcompass.lovable](https://aiwealthcompass.lovable.app/)
+   - Use AI suggestions to rebalance between equity and debt exposure.
 
-User journeys
-Market pulse first
+3. **Risk-conscious user**  
+   - Leverage concentration alerts and lock-in awareness cues before changing SIP allocations. [aiwealthcompass.lovable](https://aiwealthcompass.lovable.app/)
+   - Use the SIP Planner and AI Insights to experiment with what-if scenarios.
 
-Land on Home → scan ticker rail for NIFTY50, SENSEX, global indices, BTC, ETH, USDINR, etc.
+***
 
-Click “Open Dashboard” to view portfolio and AI commentary in context.
+## Design principles
 
-Goal-first investor
+- **Narrative over numbers**  
+  Lead with a simple story (“what should I do next?”) before deep metrics. [aiwealthcompass.lovable](https://aiwealthcompass.lovable.app/)
 
-Navigate to Dashboard → focus on “Retire by 55” or similar goals and see % completion, SIP requirements, and step-up needs.
+- **Tier-aware personalization**  
+  Same data, different playbooks for Low, Medium, and High net-worth segments. [aiwealthcompass.lovable](https://aiwealthcompass.lovable.app/)
 
-Use AI suggestions to rebalance between equity and debt exposure.
+- **Safety-first communication**  
+  Repeated, explicit disclaimers: educational demo only, not investment advice. [aiwealthcompass.lovable](https://aiwealthcompass.lovable.app/)
 
-Risk-conscious user
+- **Accessibility**  
+  Color-blind safe gain/loss cues and clear typography for long-form AI text. [aiwealthcompass.lovable](https://aiwealthcompass.lovable.app/)
 
-Leverage concentration alerts and lock-in awareness cues before changing SIP allocations.
+***
 
-Use the SIP Planner and AI Insights to experiment with what-if scenarios.
+## PM scope and contributions
 
-Design principles
-Narrative over numbers
-Lead with a simple story (“what should I do next?”) before deep metrics.
+This project is part of my Product Management portfolio. My responsibilities included:
 
-Tier-aware personalization
-Same data, different playbooks for Low, Medium, and High net-worth segments.
+- Problem discovery and user journey definition for Indian SIP/MF investors.  
+- Defining feature scope for Dashboard, Markets, Portfolio, SIP Planner, AI Insights, and About flows. [aiwealthcompass.lovable](https://aiwealthcompass.lovable.app/)
+- Writing product copy for tier-aware AI suggestions, goal narratives, and risk alerts. [aiwealthcompass.lovable](https://aiwealthcompass.lovable.app/)
+- Specifying success metrics (engagement with AI insights, goal completion views, rebalance actions).  
+- Collaborating with design and engineering on IA, component behavior, and guardrails for non-advisory positioning. [aiwealthcompass.lovable](https://aiwealthcompass.lovable.app/)
 
-Safety-first communication
-Repeated, explicit disclaimers: educational demo only, not investment advice.
+***
 
-Accessibility
-Color-blind safe gain/loss cues and clear typography for long-form AI text.
+## How to run locally
 
+> Adapt this section to your actual tech stack. Replace placeholders once your repo structure is finalized.
 
-How to run locally
-Adapt this section to your actual tech stack. Replace placeholders once your repo structure is finalized.
-
-bash
+```bash
 # 1. Clone the repository
 git clone https://github.com/<your-username>/<your-repo-name>.git
 cd <your-repo-name>
@@ -116,9 +136,17 @@ npm run dev
 
 # 4. Open in browser
 # Usually http://localhost:3000 or as per your dev server config
-Disclaimers
-All prices, tickers, and portfolio values are simulated and do not represent real financial data.
+```
 
-FinPulse AI is an educational prototype only and does not provide investment, legal, or tax advice.
+***
 
-Any examples or suggestions are illustrative and should not be acted upon without consulting a qualified financial advisor.
+## Disclaimers
+
+- All prices, tickers, and portfolio values are simulated and do not represent real financial data. [aiwealthcompass.lovable](https://aiwealthcompass.lovable.app/)
+- FinPulse AI is an educational prototype only and does not provide investment, legal, or tax advice. [aiwealthcompass.lovable](https://aiwealthcompass.lovable.app/)
+- Any examples or suggestions are illustrative and should not be acted upon without consulting a qualified financial advisor.
+
+
+--- 
+
+If you’d like, I can also create a shorter “PM case study” section you can paste into the README or your portfolio site to highlight outcomes and learnings.
